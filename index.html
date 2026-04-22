@@ -34,7 +34,6 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.18);
     }
 
-    /* HEADER */
     .header {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -74,7 +73,6 @@
       margin-top: 4px;
     }
 
-    /* SECTION */
     .section { margin-top: 10px; }
 
     .section-title {
@@ -88,7 +86,6 @@
       margin-bottom: 8px;
     }
 
-    /* SKILLS */
     .skills-table {
       display: grid;
       grid-template-columns: 90px 1fr;
@@ -98,7 +95,6 @@
     .sk-label { font-weight: 700; }
     .sk-value em { font-style: italic; font-weight: 600; }
 
-    /* ENTRY */
     .entry { margin-bottom: 10px; }
 
     .entry-head {
@@ -147,7 +143,6 @@
       color: var(--text);
     }
 
-    /* EDUCATION */
     .edu-entry {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -158,7 +153,6 @@
     .edu-sch  { font-style: italic; font-size: 9pt; color: var(--muted); }
     .edu-date { font-size: 8.5pt; color: var(--muted); white-space: nowrap; }
 
-    /* CERTS */
     .certs-list { display: flex; flex-wrap: wrap; gap: 5px; }
     .cert-tag {
       border: 1px solid var(--rule);
@@ -168,19 +162,24 @@
       color: var(--muted);
     }
 
-    /* LANGUAGES */
     .lang-row { display: flex; gap: 24px; font-size: 9pt; color: var(--muted); }
     .lang-row span strong { font-weight: 700; color: var(--text); }
 
-    /* DOWNLOAD BTN */
-    .download-btn {
+    /* BOTONES */
+    .btn-group {
       position: fixed;
       bottom: 24px;
       right: 24px;
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+
+    .btn {
       background: var(--text);
       color: #fff;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 18px;
       font-family: 'Source Sans 3', sans-serif;
       font-size: 9.5pt;
       font-weight: 600;
@@ -188,20 +187,28 @@
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
       transition: background 0.2s;
-      z-index: 100;
     }
-    .download-btn:hover { background: #333; }
+    .btn:hover { background: #333; }
+    .btn.lang-btn {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--text);
+    }
+    .btn.lang-btn:hover { background: #f0f0f0; }
 
     @media print {
       body { background: none; padding: 0; }
       .page { box-shadow: none; width: 100%; min-height: 100%; padding: 10mm 14mm; }
-      .download-btn { display: none; }
+      .btn-group { display: none; }
     }
   </style>
 </head>
 <body>
 
-<button class="download-btn" onclick="window.print()">⬇ Descargar PDF</button>
+<div class="btn-group">
+  <button class="btn lang-btn" onclick="toggleLang()">EN / ES</button>
+  <button class="btn" onclick="window.print()" id="print-btn">⬇ Descargar PDF</button>
+</div>
 
 <div class="page">
 
@@ -219,39 +226,52 @@
     </div>
   </div>
 
-  <!-- HABILIDADES -->
+  <!-- HABILIDADES / SKILLS -->
   <div class="section">
-    <div class="section-title">Habilidades</div>
+    <div class="section-title" data-es="Habilidades" data-en="Skills">Habilidades</div>
     <div class="skills-table">
-      <span class="sk-label">Lenguajes</span>
-      <span class="sk-value"><em>Avanzado:</em> Python, SQL &nbsp;·&nbsp; <em>Experiencia:</em> R, Bash scripting, C++, Pascal</span>
+      <span class="sk-label" data-es="Lenguajes" data-en="Languages">Lenguajes</span>
+      <span class="sk-value"><em data-es="Avanzado:" data-en="Advanced:">Avanzado:</em> Python, SQL &nbsp;·&nbsp; <em data-es="Experiencia:" data-en="Experience:">Experiencia:</em> R, Bash scripting, C++, Pascal</span>
+
       <span class="sk-label">Tech Stack</span>
       <span class="sk-value">AWS, GCP, Scikit-Learn, PyTorch, TensorFlow, LangChain, Scipy, Pandas, FastAPI, Git, Bash/Zsh</span>
-      <span class="sk-label">IA / ML</span>
-      <span class="sk-value">LLMs, Embeddings, Pipelines RAG, Agentes de IA, Modelado Predictivo e Inferencial</span>
+
+      <span class="sk-label">AI / ML</span>
+      <span class="sk-value" data-es="LLMs, Embeddings, Pipelines RAG, Agentes de IA, Modelado Predictivo e Inferencial" data-en="LLMs, Embeddings, RAG Pipelines, AI Agents, Predictive & Inferential Modeling">LLMs, Embeddings, Pipelines RAG, Agentes de IA, Modelado Predictivo e Inferencial</span>
     </div>
   </div>
 
-  <!-- EXPERIENCIA -->
+  <!-- EXPERIENCIA / EXPERIENCE -->
   <div class="section">
-    <div class="section-title">Experiencia</div>
+    <div class="section-title" data-es="Experiencia" data-en="Experience">Experiencia</div>
 
+    <!-- Rocking Data -->
     <div class="entry">
       <div class="entry-head">
         <span class="entry-title">Data Scientist</span>
-        <span class="entry-date">Sept 2024 — Presente</span>
+        <span class="entry-date" data-es="Sept 2024 — Presente" data-en="Sept 2024 — Present">Sept 2024 — Presente</span>
       </div>
       <div class="entry-sub">
         <span class="entry-company">Rocking Data</span>
-        <span class="entry-loc">Buenos Aires (Remoto)</span>
+        <span class="entry-loc" data-es="Buenos Aires (Remoto)" data-en="Buenos Aires (Remote)">Buenos Aires (Remoto)</span>
       </div>
       <ul class="bullets">
-        <li>Desarrollo de modelos inferenciales y predictivos, agentes basados en LLMs y pipelines de embeddings para generar insights clave y habilitar la toma de decisiones automatizada en empresas multinacionales de los sectores petrolero y farmacéutico.</li>
-        <li>Presentación de resultados analíticos a stakeholders, traduciendo hallazgos complejos en estrategias accionables alineadas con los objetivos del negocio.</li>
-        <li>Comunicación efectiva con clientes de diversas industrias, fortaleciendo relaciones y asegurando la alineación de cada proyecto con sus necesidades específicas.</li>
+        <li data-es="Desarrollo de modelos inferenciales y predictivos, agentes basados en LLMs y pipelines de embeddings para generar insights clave y habilitar la toma de decisiones automatizada en empresas multinacionales de los sectores petrolero y farmacéutico."
+            data-en="Development of inferential and predictive models, LLM-based agents, and embedding pipelines to generate key insights and enable automated decision-making for multinational companies in the oil and pharmaceutical sectors.">
+          Desarrollo de modelos inferenciales y predictivos, agentes basados en LLMs y pipelines de embeddings para generar insights clave y habilitar la toma de decisiones automatizada en empresas multinacionales de los sectores petrolero y farmacéutico.
+        </li>
+        <li data-es="Presentación de resultados analíticos a stakeholders, traduciendo hallazgos complejos en estrategias accionables alineadas con los objetivos del negocio."
+            data-en="Presentation of analytical results to stakeholders, translating complex findings into actionable strategies aligned with business objectives.">
+          Presentación de resultados analíticos a stakeholders, traduciendo hallazgos complejos en estrategias accionables alineadas con los objetivos del negocio.
+        </li>
+        <li data-es="Comunicación efectiva con clientes de diversas industrias, fortaleciendo relaciones y asegurando la alineación de cada proyecto con sus necesidades específicas."
+            data-en="Effective communication with clients across diverse industries, strengthening relationships and ensuring each project aligns with their specific needs.">
+          Comunicación efectiva con clientes de diversas industrias, fortaleciendo relaciones y asegurando la alineación de cada proyecto con sus necesidades específicas.
+        </li>
       </ul>
     </div>
 
+    <!-- ARTEAR -->
     <div class="entry">
       <div class="entry-head">
         <span class="entry-title">Data Scientist</span>
@@ -259,15 +279,25 @@
       </div>
       <div class="entry-sub">
         <span class="entry-company">ARTEAR</span>
-        <span class="entry-loc">Buenos Aires (Híbrido)</span>
+        <span class="entry-loc" data-es="Buenos Aires (Híbrido)" data-en="Buenos Aires (Hybrid)">Buenos Aires (Híbrido)</span>
       </div>
       <ul class="bullets">
-        <li>Implementación de sistemas de tracking de eventos y desarrollo de modelos predictivos de audiencia que optimizaron la programación y las estrategias digitales del grupo audiovisual con mayor audiencia de Argentina.</li>
-        <li>Liderazgo de iniciativas de análisis de datos para medios digitales, generando reportes sobre comportamiento de usuarios y performance de contenidos en plataformas de TV y web.</li>
-        <li>Colaboración estrecha con equipos de Marketing, UX/UI e Ingeniería de Datos para evaluar y optimizar fuentes de datos y arquitecturas internas.</li>
+        <li data-es="Implementación de sistemas de tracking de eventos y desarrollo de modelos predictivos de audiencia que optimizaron la programación y las estrategias digitales del grupo audiovisual con mayor audiencia de Argentina."
+            data-en="Implementation of event tracking systems and development of audience predictive models that optimized scheduling and digital strategies for Argentina's largest audiovisual media group.">
+          Implementación de sistemas de tracking de eventos y desarrollo de modelos predictivos de audiencia que optimizaron la programación y las estrategias digitales del grupo audiovisual con mayor audiencia de Argentina.
+        </li>
+        <li data-es="Liderazgo de iniciativas de análisis de datos para medios digitales, generando reportes sobre comportamiento de usuarios y performance de contenidos en plataformas de TV y web."
+            data-en="Led data analysis initiatives for digital media, generating reports on user behavior and content performance across TV and web platforms.">
+          Liderazgo de iniciativas de análisis de datos para medios digitales, generando reportes sobre comportamiento de usuarios y performance de contenidos en plataformas de TV y web.
+        </li>
+        <li data-es="Colaboración estrecha con equipos de Marketing, UX/UI e Ingeniería de Datos para evaluar y optimizar fuentes de datos y arquitecturas internas."
+            data-en="Close collaboration with Marketing, UX/UI, and Data Engineering teams to evaluate and optimize internal data sources and architectures.">
+          Colaboración estrecha con equipos de Marketing, UX/UI e Ingeniería de Datos para evaluar y optimizar fuentes de datos y arquitecturas internas.
+        </li>
       </ul>
     </div>
 
+    <!-- Outlier -->
     <div class="entry">
       <div class="entry-head">
         <span class="entry-title">AI Trainer</span>
@@ -275,46 +305,65 @@
       </div>
       <div class="entry-sub">
         <span class="entry-company">Outlier</span>
-        <span class="entry-loc">Remoto (Freelance)</span>
+        <span class="entry-loc" data-es="Remoto (Freelance)" data-en="Remote (Freelance)">Remoto (Freelance)</span>
       </div>
       <ul class="bullets">
-        <li>Resolución de desafíos técnicos en programación, lógica, matemática y análisis de datos para el fine-tuning y evaluación de modelos de IA.</li>
-        <li>Generación de feedback estructurado en base a criterios de calidad, contribuyendo a mejorar el rendimiento de los modelos en aplicaciones reales.</li>
+        <li data-es="Resolución de desafíos técnicos en programación, lógica, matemática y análisis de datos para el fine-tuning y evaluación de modelos de IA."
+            data-en="Solved technical challenges in programming, logic, mathematics, and data analysis for AI model fine-tuning and evaluation.">
+          Resolución de desafíos técnicos en programación, lógica, matemática y análisis de datos para el fine-tuning y evaluación de modelos de IA.
+        </li>
+        <li data-es="Generación de feedback estructurado en base a criterios de calidad, contribuyendo a mejorar el rendimiento de los modelos en aplicaciones reales."
+            data-en="Generated structured feedback based on quality criteria, contributing to improved model performance in real-world applications.">
+          Generación de feedback estructurado en base a criterios de calidad, contribuyendo a mejorar el rendimiento de los modelos en aplicaciones reales.
+        </li>
       </ul>
     </div>
 
+    <!-- Henry -->
     <div class="entry">
       <div class="entry-head">
-        <span class="entry-title">Mentor de Data Science</span>
+        <span class="entry-title" data-es="Mentor de Data Science" data-en="Data Science Mentor">Mentor de Data Science</span>
         <span class="entry-date">Mar 2024 — Abr 2025</span>
       </div>
       <div class="entry-sub">
         <span class="entry-company">Henry</span>
-        <span class="entry-loc">Remoto (Freelance)</span>
+        <span class="entry-loc" data-es="Remoto (Freelance)" data-en="Remote (Freelance)">Remoto (Freelance)</span>
       </div>
       <ul class="bullets">
-        <li>Acompañamiento de grupos de alumnos en sus proyectos finales de Data Science y Analytics con rol de project manager: coordinación de tareas, gestión de entregables y desarrollo de MVPs funcionales que integraron el ciclo completo de datos.</li>
-        <li>Generación de un entorno colaborativo que fomentó el aprendizaje y el desarrollo de habilidades técnicas aplicadas.</li>
+        <li data-es="Acompañamiento de grupos de alumnos en sus proyectos finales de Data Science y Analytics con rol de project manager: coordinación de tareas, gestión de entregables y desarrollo de MVPs funcionales que integraron el ciclo completo de datos."
+            data-en="Guided student groups through final Data Science and Analytics projects as project manager: task coordination, deliverable management, and development of functional MVPs integrating the full data lifecycle.">
+          Acompañamiento de grupos de alumnos en sus proyectos finales de Data Science y Analytics con rol de project manager: coordinación de tareas, gestión de entregables y desarrollo de MVPs funcionales que integraron el ciclo completo de datos.
+        </li>
+        <li data-es="Generación de un entorno colaborativo que fomentó el aprendizaje y el desarrollo de habilidades técnicas aplicadas."
+            data-en="Built a collaborative environment that fostered learning and the development of applied technical skills.">
+          Generación de un entorno colaborativo que fomentó el aprendizaje y el desarrollo de habilidades técnicas aplicadas.
+        </li>
       </ul>
     </div>
   </div>
 
-  <!-- EDUCACIÓN -->
+  <!-- EDUCACIÓN / EDUCATION -->
   <div class="section">
-    <div class="section-title">Educación</div>
+    <div class="section-title" data-es="Educación" data-en="Education">Educación</div>
     <div class="edu-entry">
-      <span><span class="edu-deg">Lic. en Ciencia de Datos</span>&nbsp;<span class="edu-sch">— Universidad de Buenos Aires (UBA)</span></span>
-      <span class="edu-date">Abril 2025 — Presente</span>
+      <span>
+        <span class="edu-deg" data-es="Lic. en Ciencia de Datos" data-en="B.S. in Data Science">Lic. en Ciencia de Datos</span>&nbsp;
+        <span class="edu-sch" data-es="— Universidad de Buenos Aires (UBA)" data-en="— University of Buenos Aires (UBA)">— Universidad de Buenos Aires (UBA)</span>
+      </span>
+      <span class="edu-date" data-es="Abril 2025 — Presente" data-en="April 2025 — Present">Abril 2025 — Presente</span>
     </div>
     <div class="edu-entry">
-      <span><span class="edu-deg">Ingeniería en Sistemas de Información</span>&nbsp;<span class="edu-sch">— Universidad Tecnológica Nacional (UTN)</span></span>
-      <span class="edu-date">Marzo 2021 — Abril 2025</span>
+      <span>
+        <span class="edu-deg" data-es="Ingeniería en Sistemas de Información" data-en="Information Systems Engineering">Ingeniería en Sistemas de Información</span>&nbsp;
+        <span class="edu-sch" data-es="— Universidad Tecnológica Nacional (UTN)" data-en="— National Technological University (UTN)">— Universidad Tecnológica Nacional (UTN)</span>
+      </span>
+      <span class="edu-date" data-es="Marzo 2021 — Abril 2025" data-en="March 2021 — April 2025">Marzo 2021 — Abril 2025</span>
     </div>
   </div>
 
-  <!-- CERTIFICACIONES -->
+  <!-- CERTIFICACIONES / CERTIFICATIONS -->
   <div class="section">
-    <div class="section-title">Certificaciones</div>
+    <div class="section-title" data-es="Certificaciones" data-en="Certifications">Certificaciones</div>
     <div class="certs-list">
       <span class="cert-tag">Google Cloud Big Data &amp; ML Fundamentals</span>
       <span class="cert-tag">Modernizing Data Lakes &amp; Data Warehouses — GCP</span>
@@ -324,15 +373,36 @@
     </div>
   </div>
 
-  <!-- IDIOMAS -->
+  <!-- IDIOMAS / LANGUAGES -->
   <div class="section">
-    <div class="section-title">Idiomas</div>
+    <div class="section-title" data-es="Idiomas" data-en="Languages">Idiomas</div>
     <div class="lang-row">
-      <span><strong>Español</strong> — Nativo</span>
-      <span><strong>Inglés</strong> — Competencia profesional</span>
+      <span><strong data-es="Español" data-en="Spanish">Español</strong> — <span data-es="Nativo" data-en="Native">Nativo</span></span>
+      <span><strong data-es="Inglés" data-en="English">Inglés</strong> — <span data-es="Competencia profesional" data-en="Professional proficiency">Competencia profesional</span></span>
     </div>
   </div>
 
 </div>
+
+<script>
+  let currentLang = 'es';
+
+  function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    const printBtn = document.getElementById('print-btn');
+
+    // Actualizar todos los elementos con data-es / data-en
+    document.querySelectorAll('[data-es][data-en]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + currentLang);
+    });
+
+    // Botón de descarga
+    printBtn.textContent = currentLang === 'es' ? '⬇ Descargar PDF' : '⬇ Download PDF';
+
+    // html lang
+    document.documentElement.lang = currentLang;
+  }
+</script>
+
 </body>
 </html>
