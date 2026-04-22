@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lautaro Paniagua – Data Scientist</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --text:    #111111;
+      --muted:   #555555;
+      --light:   #888888;
+      --rule:    #cccccc;
+      --surface: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 9.5pt;
+      color: var(--text);
+      background: #d0d0d0;
+      display: flex;
+      justify-content: center;
+      padding: 28px 0 56px;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--surface);
+      padding: 13mm 15mm;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    }
+
+    /* HEADER */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 10px;
+      padding-bottom: 9px;
+      border-bottom: 1.5px solid var(--text);
+    }
+
+    .contact-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 8.2pt;
+      color: var(--muted);
+      padding-top: 5px;
+    }
+
+    .name-col { text-align: right; }
+
+    .name-col h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: 30pt;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.0;
+      letter-spacing: -0.5px;
+    }
+
+    .name-col .title {
+      font-size: 9pt;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* SECTION */
+    .section { margin-top: 10px; }
+
+    .section-title {
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+
+    /* SKILLS */
+    .skills-table {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 4px 12px;
+      font-size: 9pt;
+    }
+    .sk-label { font-weight: 700; }
+    .sk-value em { font-style: italic; font-weight: 600; }
+
+    /* ENTRY */
+    .entry { margin-bottom: 10px; }
+
+    .entry-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .entry-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 11.5pt;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .entry-date {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .entry-sub {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 1px;
+    }
+
+    .entry-company { font-style: italic; font-size: 8.8pt; color: var(--text); }
+    .entry-loc     { font-style: italic; font-size: 8.5pt; color: var(--muted); }
+
+    ul.bullets {
+      margin-top: 5px;
+      padding-left: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5px;
+    }
+
+    ul.bullets li {
+      font-size: 9pt;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    /* EDUCATION */
+    .edu-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+    .edu-deg  { font-weight: 700; font-size: 9pt; }
+    .edu-sch  { font-style: italic; font-size: 9pt; color: var(--muted); }
+    .edu-date { font-size: 8.5pt; color: var(--muted); white-space: nowrap; }
+
+    /* CERTS */
+    .certs-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .cert-tag {
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 2px 8px;
+      font-size: 7.8pt;
+      color: var(--muted);
+    }
+
+    /* LANGUAGES */
+    .lang-row { display: flex; gap: 24px; font-size: 9pt; color: var(--muted); }
+    .lang-row span strong { font-weight: 700; color: var(--text); }
+
+    /* DOWNLOAD BTN */
+    .download-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 9.5pt;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      transition: background 0.2s;
+      z-index: 100;
+    }
+    .download-btn:hover { background: #333; }
+
+    @media print {
+      body { background: none; padding: 0; }
+      .page { box-shadow: none; width: 100%; min-height: 100%; padding: 10mm 14mm; }
+      .download-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="download-btn" onclick="window.print()">⬇ Descargar PDF</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="contact-col">
+      <span>+54 3442 497179</span>
+      <span>Capital Federal, Argentina</span>
+      <span>lautaroppaniagua@gmail.com</span>
+      <span>linkedin.com/in/lautaroppaniagua</span>
+    </div>
+    <div class="name-col">
+      <h1>Lautaro<br>Paniagua</h1>
+      <div class="title">Data Scientist &nbsp;·&nbsp; AWS ML Specialist</div>
+    </div>
+  </div>
+
+  <!-- HABILIDADES -->
+  <div class="section">
+    <div class="section-title">Habilidades</div>
+    <div class="skills-table">
+      <span class="sk-label">Lenguajes</span>
+      <span class="sk-value"><em>Avanzado:</em> Python, SQL &nbsp;·&nbsp; <em>Experiencia:</em> R, Bash scripting, C++, Pascal</span>
+      <span class="sk-label">Tech Stack</span>
+      <span class="sk-value">AWS, GCP, Scikit-Learn, PyTorch, TensorFlow, LangChain, Scipy, Pandas, FastAPI, Git, Bash/Zsh</span>
+      <span class="sk-label">IA / ML</span>
+      <span class="sk-value">LLMs, Embeddings, Pipelines RAG, Agentes de IA, Modelado Predictivo e Inferencial</span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCIA -->
+  <div class="section">
+    <div class="section-title">Experiencia</div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Data Scientist</span>
+        <span class="entry-date">Sept 2024 — Presente</span>
+      </div>
+      <div class="entry-sub">
+        <span class="entry-company">Rocking Data</span>
+        <span class="entry-loc">Buenos Aires (Remoto)</span>
+      </div>
+      <ul class="bullets">
+        <li>Desarrollo de modelos inferenciales y predictivos, agentes basados en LLMs y pipelines de embeddings para generar insights clave y habilitar la toma de decisiones automatizada en empresas multinacionales de los sectores petrolero y farmacéutico.</li>
+        <li>Presentación de resultados analíticos a stakeholders, traduciendo hallazgos complejos en estrategias accionables alineadas con los objetivos del negocio.</li>
+        <li>Comunicación efectiva con clientes de diversas industrias, fortaleciendo relaciones y asegurando la alineación de cada proyecto con sus necesidades específicas.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Data Scientist</span>
+        <span class="entry-date">Dic 2023 — Sept 2024</span>
+      </div>
+      <div class="entry-sub">
+        <span class="entry-company">ARTEAR</span>
+        <span class="entry-loc">Buenos Aires (Híbrido)</span>
+      </div>
+      <ul class="bullets">
+        <li>Implementación de sistemas de tracking de eventos y desarrollo de modelos predictivos de audiencia que optimizaron la programación y las estrategias digitales del grupo audiovisual con mayor audiencia de Argentina.</li>
+        <li>Liderazgo de iniciativas de análisis de datos para medios digitales, generando reportes sobre comportamiento de usuarios y performance de contenidos en plataformas de TV y web.</li>
+        <li>Colaboración estrecha con equipos de Marketing, UX/UI e Ingeniería de Datos para evaluar y optimizar fuentes de datos y arquitecturas internas.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">AI Trainer</span>
+        <span class="entry-date">Ago 2024 — Mar 2025</span>
+      </div>
+      <div class="entry-sub">
+        <span class="entry-company">Outlier</span>
+        <span class="entry-loc">Remoto (Freelance)</span>
+      </div>
+      <ul class="bullets">
+        <li>Resolución de desafíos técnicos en programación, lógica, matemática y análisis de datos para el fine-tuning y evaluación de modelos de IA.</li>
+        <li>Generación de feedback estructurado en base a criterios de calidad, contribuyendo a mejorar el rendimiento de los modelos en aplicaciones reales.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Mentor de Data Science</span>
+        <span class="entry-date">Mar 2024 — Abr 2025</span>
+      </div>
+      <div class="entry-sub">
+        <span class="entry-company">Henry</span>
+        <span class="entry-loc">Remoto (Freelance)</span>
+      </div>
+      <ul class="bullets">
+        <li>Acompañamiento de grupos de alumnos en sus proyectos finales de Data Science y Analytics con rol de project manager: coordinación de tareas, gestión de entregables y desarrollo de MVPs funcionales que integraron el ciclo completo de datos.</li>
+        <li>Generación de un entorno colaborativo que fomentó el aprendizaje y el desarrollo de habilidades técnicas aplicadas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EDUCACIÓN -->
+  <div class="section">
+    <div class="section-title">Educación</div>
+    <div class="edu-entry">
+      <span><span class="edu-deg">Lic. en Ciencia de Datos</span>&nbsp;<span class="edu-sch">— Universidad de Buenos Aires (UBA)</span></span>
+      <span class="edu-date">Abril 2025 — Presente</span>
+    </div>
+    <div class="edu-entry">
+      <span><span class="edu-deg">Ingeniería en Sistemas de Información</span>&nbsp;<span class="edu-sch">— Universidad Tecnológica Nacional (UTN)</span></span>
+      <span class="edu-date">Marzo 2021 — Abril 2025</span>
+    </div>
+  </div>
+
+  <!-- CERTIFICACIONES -->
+  <div class="section">
+    <div class="section-title">Certificaciones</div>
+    <div class="certs-list">
+      <span class="cert-tag">Google Cloud Big Data &amp; ML Fundamentals</span>
+      <span class="cert-tag">Modernizing Data Lakes &amp; Data Warehouses — GCP</span>
+      <span class="cert-tag">Intro to Deep Learning &amp; Neural Networks (Keras)</span>
+      <span class="cert-tag">FastAPI: Intro, Validaciones &amp; Autenticación</span>
+      <span class="cert-tag">Conceptos básicos de Google Tag Manager</span>
+    </div>
+  </div>
+
+  <!-- IDIOMAS -->
+  <div class="section">
+    <div class="section-title">Idiomas</div>
+    <div class="lang-row">
+      <span><strong>Español</strong> — Nativo</span>
+      <span><strong>Inglés</strong> — Competencia profesional</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
